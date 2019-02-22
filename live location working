@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	  <script src="https://www.gstatic.com/firebasejs/5.8.3/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.8.3/firebase-auth.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/5.8.3/firebase-database.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.8.3/firebase-firestore.js"></script>
+</head>
+<body>
+
+<p>Click the button to get your coordinates.</p>
+
+<button onclick="getLocation()">Try It</button>
+
+<p id="demo"></p>
+
+<script>
+var x = document.getElementById("demo");
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+var lats;
+var lngs;
+
+function showPosition(position) {
+
+	lats = position.coords.latitude;
+	lngs = position.coords.longitude;
+	console.log(lats,lngs);
+  x.innerHTML = "Latitude: " + position.coords.latitude + 
+  "<br>Longitude: " + position.coords.longitude;
+}
+
+            function run(){
+	           var config = {
+	            apiKey: "AIzaSyBDAKkR10wduWyorI6Y-XgPO60GpbMCEPw",
+	            authDomain: "gps-tracking-e2acb.firebaseapp.com",
+	            databaseURL: "https://gps-tracking-e2acb.firebaseio.com",
+	            projectId: "gps-tracking-e2acb",
+	            storageBucket: "gps-tracking-e2acb.appspot.com",
+	            messagingSenderId: "779552070796"
+	          };
+	                firebase.initializeApp(config);
+	                // console.log(firebase);
+        	}
+
+        			run();
+        			
+		function put(){
+	            var database = firebase.database();
+				var ref = database.ref("coordinates");
+				var data = {
+					lat: lats,
+					lng: lngs
+						}
+				// console.log(data);
+				ref.push(data);
+				}
+
+		setInterval(put,3000);
+        </script>
+
+</body>
+</html>

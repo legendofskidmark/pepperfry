@@ -1,7 +1,5 @@
 
 /**
- * Calculates and displays  a truck route from Chicago O'Hare Airport to
- * the I-290 Eisenhower Expressway nearby.
  *
  * A full list of available request parameters can be found in the Routing API documentation.
  * see:  http://developer.here.com/rest-apis/documentation/enterprise-routing/topics/resource-calculate-route.html
